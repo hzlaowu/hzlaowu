@@ -3,4 +3,5 @@
 复制下方代码
 
 ```bash
-wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/AlexWu2022/hzlaowu/master/hzlaowu.sh" && chmod +x zlaowu.sh && ./hzlaowu.sh```
+wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/AlexWu2022/hzlaowu/master/hzlaowu.sh" && chmod +x zlaowu.sh && ./hzlaowu.sh
+```
