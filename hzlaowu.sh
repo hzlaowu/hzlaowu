@@ -15,6 +15,10 @@ blue(){
     echo -e "\033[34m\033[01m$1\033[0m"
 }
 
+
+# check root
+[[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
+
 #服务器检查项目
 #Lemonbench 综合测试
 function Lemonbench(){
@@ -324,85 +328,58 @@ function start_menu(){
     echo
     read -p "请输入数字:" menuNumberInput
     case "$menuNumberInput" in
-        1 )
-           Lemonbench
+         1 )  Lemonbench
 	;;
-        2 )
-           3speed
+         2 )  3speed
 	;;
-        3 )
-           memorytest
+         3 )  memorytest
 	;;
-        4 )
-           rtsh
+         4 )  rtsh
 	;;
-        5 )
-           speedtest-linux
+         5 )  speedtest-linux
 	;;
-	    6 )
-           getip
+	     6 )  getip
 	;;
-	    7 )
-           nf1
+	     7 )  nf1
 	;;
-	    8 )
-           nf2
+	     8 )  nf2
 	;;
-	    9 )
-           wc
+	     9 )  wc
 	;; 
-	    10 )
-           jgw
+	    10 )  jgw
 	;;
-	21 )
-           cssh
+	    21 )  cssh
 	;;
-	22 )
-           ipvsh
+	    22 )  ipvsh
 	;;
-	23 )
-           swapsh
+	    23 )  swapsh
 	;;
-	24 )
-           bbr
+	    24 )  bbr
 	;;
-	25 )
-           system-best
+	    25 )  system-best
 	;;
-	26 )
-           btnew
+	    26 )  btnew
 	;;
-	27 )
-           aaPanel
+	    27 )  aaPanel
 	;;
-	28 )
-           btpj
+	    28 )  btpj
 	;;
-	41 )
-           iptsh
+	    41 )  iptsh
 	;;
-	42 )
-           gost
+	    42 )  gost
 	;;
-	43 )
-           mtp
+	    43 )  mtp
 	;;
-	44 )
-           xray
+	    44 )  xray
 	;;
-	45 )
-           v2-ui
+	    45 )  v2-ui
 	;;
-	46 )
-           wulabing
+	    46 )  wulabing
 	;;
-        0 )
-            exit 1
+        0 )   exit 1
         ;;
-        * )
-            clear
-            red "请输入正确数字 !"
-            start_menu
+        *) red "数字输入错误，请重新输入正确的数字 !"
+		sleep 1s;clear;start_menu
         ;;
     esac
 }
