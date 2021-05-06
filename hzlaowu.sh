@@ -379,7 +379,7 @@ function start_menu(){
         0 )   exit 1
         ;;
         *) red "数字输入错误，请重新输入正确的数字 !"
-		sleep 1s;clear;start_menu
+		sleep 3s;clear;start_menu
         ;;
     esac
 }
