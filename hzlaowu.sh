@@ -98,6 +98,14 @@ yellow "#安装wget/curl - Ubuntu"
 green  "apt-get update && apt-get install wget curl -y"
 }
 
+#jgw 甲骨文关闭防火墙
+function jgw(){
+red "清除iptables规则"
+sudo iptables -P INPUT ACCEPT;sudo iptables -P FORWARD ACCEPT;sudo iptables -P OUTPUT ACCEPT;sudo iptables -F
+red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
+sudo apt-get purge netfilter-persistent;sudo reboot
+}
+
 #服务器功能调试
 #ChangeSource Linux换源脚本·下载
 function cssh(){
@@ -279,39 +287,39 @@ bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
 #主菜单
 function start_menu(){
     clear
-    red " hzlaowu 常用脚本包" 
+    red   "                         hzlaowu 常用脚本包" 
     
 	
-	yellow " =======服务器检查============================== "
-    green " 1. Lemonbench 综合测试 "
-    green " 2. 三网Speedtest测速"
-    green " 3. 内存压力测试"
-    green " 4. 回程路由追踪" 
-    green " 5. Speedtest测速"
-    green " 6. 获取本机IP"
-    green " 7. 流媒体解锁测试"
-	green " 8. 奈飞原生IP检测"
-	green " 9. 安装wget/curl"
+	yellow " =======服务器检查====================================================== "
+    green "  1. Lemonbench 综合测试                     8. 奈飞原生IP检测"
+    green "  2. 三网Speedtest测速                       9. 安装wget/curl"
+    green "  3. 内存压力测试                           10. 甲骨文关闭防火墙"
+    green "  4. 回程路由追踪" 
+    green "  5. Speedtest测速"
+    green "  6. 获取本机IP"
+    green "  7. 流媒体解锁测试"
 	
-    yellow " =======服务器功能============================== "
-    green " 11. Linux换源脚本"
-    green " 12. ipv4/6优先级调整 " 
-    green " 13. 虚拟内存SWAP一键安装 "
-    green " 14. 一键安装BBR "
-    green " 15. 系统网络配置优化 "
-    green " 16. 宝塔中文官方一键安装 "
-	green " 17. 宝塔英文官方一键安装（无需验证） "
-	green " 18. 宝塔面板破解纯净版 "
 
-    yellow " =======科学上网工具============================ "
-    green " 21. iptables一键中转 "
-    green " 22. gost一键中转 "
-    green " 23. MTP&TLS 一键脚本 "
-    green " 24. xray一键安装8合一脚本 "
-    green " 25. v2-ui一键安装 "
-	green " 26. wulabing一键xray脚本 "
 	
-    yellow " =============================================== "
+    yellow " =======服务器功能====================================================== "
+    green " 21. Linux换源脚本"
+    green " 22. ipv4/6优先级调整 " 
+    green " 23. 虚拟内存SWAP一键安装 "
+    green " 24. 一键安装BBR "
+    green " 25. 系统网络配置优化 "
+    green " 26. 宝塔中文官方一键安装 "
+	green " 27. 宝塔英文官方一键安装（无需验证） "
+	green " 28. 宝塔面板破解纯净版 "
+
+    yellow " =======科学上网工具===================================================== "
+    green " 41. iptables一键中转 "
+    green " 42. gost一键中转 "
+    green " 43. MTP&TLS 一键脚本 "
+    green " 44. xray一键安装8合一脚本 "
+    green " 45. v2-ui一键安装 "
+	green " 46. wulabing一键xray脚本 "
+	
+    yellow " ======================================================================== "
     green " 0. 退出脚本"
     echo
     read -p "请输入数字:" menuNumberInput
@@ -342,47 +350,50 @@ function start_menu(){
 	;;
 	    9 )
            wc
-	;;
-	11 )
-           cssh
-	;;
-	12 )
-           ipvsh
-	;;
-	13 )
-           swapsh
-	;;
-	14 )
-           bbr
-	;;
-	15 )
-           system-best
-	;;
-	16 )
-           btnew
-	;;
-	17 )
-           aaPanel
-	;;
-	18 )
-           btpj
+	;; 
+	    10 )
+           jgw
 	;;
 	21 )
-           iptsh
+           cssh
 	;;
 	22 )
-           gost
+           ipvsh
 	;;
 	23 )
-           mtp
+           swapsh
 	;;
 	24 )
-           xray
+           bbr
 	;;
 	25 )
-           v2-ui
+           system-best
 	;;
 	26 )
+           btnew
+	;;
+	27 )
+           aaPanel
+	;;
+	28 )
+           btpj
+	;;
+	41 )
+           iptsh
+	;;
+	42 )
+           gost
+	;;
+	43 )
+           mtp
+	;;
+	44 )
+           xray
+	;;
+	45 )
+           v2-ui
+	;;
+	46 )
            wulabing
 	;;
         0 )
