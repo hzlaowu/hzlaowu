@@ -92,7 +92,7 @@ wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6
 }
 
 #wc 安装wget/curl
-function wc(){
+function wget/curl(){
 red "比较简单，还是自己复制代码吧"
 yellow "安装wget/curl - Centos"
 green  "yum update && yum install wget curl -y "
@@ -344,7 +344,7 @@ function start_menu(){
 	;;
 	     8 )  nf2
 	;;
-	     9 )  wc
+	     9 )  wget/curl
 	;; 
 	    10 )  jgw
 	;;
