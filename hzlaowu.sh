@@ -125,7 +125,7 @@ function jgw(){
     sudo iptables -P OUTPUT ACCEPT;
     sudo iptables -F;
     red "Ubuntu镜像默认设置了Iptable规则，关闭它后将自动重启"
-	sleep 3s;clear;
+	sleep 3s;
     sudo apt-get purge netfilter-persistent;
     sudo reboot;
 	#或者强制删除rm -rf /etc/iptables && reboot
