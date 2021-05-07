@@ -94,7 +94,6 @@ wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6
 
 #wc 安装wget/curl
 function wget/curl(){
-#安装wget、curl
 	if [ -e "/etc/redhat-release" ];then
 	yum update && yum install wget curl -y;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
@@ -105,9 +104,8 @@ function wget/curl(){
 	fi
 }
 
-#jgw 甲骨文关闭防火墙
+#jgw Oracle防火墙
 function jgw(){
-#甲骨文关闭防火墙
 	if [ -e "/etc/redhat-release" ];then
 	red "CentOS系统删除多余附件"
     systemctl stop oracle-cloud-agent;
@@ -119,18 +117,18 @@ function jgw(){
     red "禁止firewall开机启动"
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	red "Ubuntu系统开放所有端口"
+	red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
     sudo iptables -F;
-    red "Ubuntu镜像默认设置了Iptable规则，关闭它后将自动重启"
+    red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
 	sleep 3s;
     sudo apt-get purge netfilter-persistent;
     sudo reboot;
 	#或者强制删除rm -rf /etc/iptables && reboot
     else 
-	echo -e "${Font_Red}请手动关闭防火墙${Font_Suffix}";
+	echo -e "${Font_Red}请手动设置防火墙${Font_Suffix}";
 	exit;
 	fi
 }
@@ -322,7 +320,7 @@ function start_menu(){
 	yellow " =======服务器检查====================================================== "
     green "  1. Lemonbench 综合测试                     8. 奈飞原生IP检测"
     green "  2. 三网Speedtest测速                       9. 安装wget/curl"
-    green "  3. 内存压力测试                           10. 甲骨文关闭防火墙"
+    green "  3. 内存压力测试                           10. Oracle防火墙"
     green "  4. 回程路由追踪" 
     green "  5. Speedtest测速"
     green "  6. 获取本机IP"
