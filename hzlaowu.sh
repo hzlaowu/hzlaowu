@@ -119,6 +119,7 @@ function jgw(){
     red "禁止firewall开机启动"
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	red "开放所有端口"
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
