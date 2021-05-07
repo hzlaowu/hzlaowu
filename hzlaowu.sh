@@ -94,21 +94,43 @@ wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6
 
 #wc 安装wget/curl
 function wget/curl(){
-red "比较简单，还是自己复制代码吧"
-yellow "安装wget/curl - Centos"
-green  "yum update && yum install wget curl -y "
-yellow "#安装wget/curl - Debian"
-green  "apt update && apt install wget curl -y"
-yellow "#安装wget/curl - Ubuntu"
-green  "apt-get update && apt-get install wget curl -y"
+#安装wget、curl
+	if [ -e "/etc/redhat-release" ];then
+	yum update && yum install -y wget curl;
+	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	apt-get update && apt-get install wget -y;
+	else 
+	echo -e "${Font_Red}请手动安装wget、curl${Font_Suffix}";
+	exit;
+	fi
 }
 
 #jgw 甲骨文关闭防火墙
 function jgw(){
-red "清除iptables规则"
-sudo iptables -P INPUT ACCEPT;sudo iptables -P FORWARD ACCEPT;sudo iptables -P OUTPUT ACCEPT;sudo iptables -F
-red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
-sudo apt-get purge netfilter-persistent;sudo reboot
+#甲骨文关闭防火墙
+	if [ -e "/etc/redhat-release" ];then
+	red "删除多余附件"
+    systemctl stop oracle-cloud-agent;
+    systemctl disable oracle-cloud-agent;
+    systemctl stop oracle-cloud-agent-updater;
+    systemctl disable oracle-cloud-agent-updater;
+    red "停止firewall"
+    systemctl stop firewalld.service;
+    red "禁止firewall开机启动"
+    systemctl disable firewalld.service;
+	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	sudo iptables -P INPUT ACCEPT;
+    sudo iptables -P FORWARD ACCEPT;
+    sudo iptables -P OUTPUT ACCEPT;
+    sudo iptables -F;
+    red "Ubuntu镜像默认设置了Iptable规则，关闭它"
+    sudo apt-get purge netfilter-persistent;
+    sudo reboot;
+	#或者强制删除rm -rf /etc/iptables && reboot
+    else 
+	echo -e "${Font_Red}请手动关闭防火墙${Font_Suffix}";
+	exit;
+	fi
 }
 
 #服务器功能调试
