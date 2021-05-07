@@ -109,7 +109,7 @@ function wget/curl(){
 function jgw(){
 #甲骨文关闭防火墙
 	if [ -e "/etc/redhat-release" ];then
-	red "删除多余附件"
+	red "CentOS系统删除多余附件"
     systemctl stop oracle-cloud-agent;
     systemctl disable oracle-cloud-agent;
     systemctl stop oracle-cloud-agent-updater;
@@ -119,7 +119,7 @@ function jgw(){
     red "禁止firewall开机启动"
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	red "开放所有端口"
+	red "Ubuntu系统开放所有端口"
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
