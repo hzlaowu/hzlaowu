@@ -96,9 +96,9 @@ wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6
 function wget/curl(){
 #安装wget、curl
 	if [ -e "/etc/redhat-release" ];then
-	yum update && yum install -y wget curl;
+	yum update && yum install wget curl -y;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	apt-get update && apt-get install wget -y;
+	apt-get update && apt-get install wget curl -y;
 	else 
 	echo -e "${Font_Red}请手动安装wget、curl${Font_Suffix}";
 	exit;
