@@ -37,15 +37,13 @@ function getip(){
     echo
 }
 
-#nf.sh 流媒体解锁测试
-function nf1(){
-        #安装JQ
+#MediaUnlock_Test 流媒体解锁测试
+function MediaUnlock_Test(){
+    #安装JQ
 	if [ -e "/etc/redhat-release" ];then
-	yum install epel-release -y -q > /dev/null;
-	yum install jq -y -q > /dev/null;
+	yum install curl -y
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	apt-get update -y > /dev/null;
-	apt-get install jq > /dev/null;
+	apt-get update && apt-get install curl
 	else 
 	echo -e "${Font_Red}请手动安装jq${Font_Suffix}";
 	exit;
@@ -55,10 +53,10 @@ function nf1(){
 	echo -e "${Font_Red}请手动安装jq${Font_Suffix}";
 	exit;
         fi
-bash <(curl -sSL https://raw.githubusercontent.com/Netflixxp/NF/main/nf.sh)
+    bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
 }
 
-#nf.sh 奈飞原生IP检测
+#nf.sh 快速奈飞原生IP检测
 function nf2(){
 wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6_linux_amd64 && chmod +x nf && clear && ./nf
 }
@@ -292,7 +290,7 @@ function start_menu(){
     green "  1. VPS综合性能测试脚本"
     green "  2. 获取本机IP"                      
     green "  3. 流媒体解锁测试"                          
-    green "  4. 奈飞原生IP检测" 
+    green "  4. 快速奈飞原生IP检测" 
     green "  5. 安装wget/curl"
     green "  6. Oracle防火墙"
     
@@ -325,7 +323,7 @@ function start_menu(){
 	;;
          2 )  getip
 	;;
-         3 )  nf1
+         3 )  MediaUnlock_Test
 	;;
          4 )  nf2
 	;;
