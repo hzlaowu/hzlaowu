@@ -103,6 +103,16 @@ function Oracle_Firewall(){
 }
 
 #服务器功能调试
+#安装BBR加速
+function Linux-NetSpeed(){
+yellow "下载完成后,你可以输入 bash tcp.sh 来手动运行或使用 ./tcp.sh 再次运行BBR加速脚本"
+wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"
+sleep 2s
+chmod +x "tcp.sh"
+yellow "下载完成,马上运行BBR加速脚本"
+bash "./tcp.sh"
+}
+
 #ChangeSource Linux换源脚本·下载
 function cssh(){
 wget -O "/root/changesource.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/changesource.sh" --no-check-certificate -T 30 -t 5 -d
@@ -137,16 +147,6 @@ chmod +x "/root/swap.sh"
 chmod 777 "/root/swap.sh"
 yellow "下载完成,你也可以输入 bash /root/swap.sh 来手动运行"
 bash "/root/swap.sh"
-}
-
-#安装BBR加速
-function Linux-NetSpeed(){
-yellow "下载完成后,你可以输入 bash /root/tcp.sh 来手动运行或使用 ./tcp.sh 再次运行脚本"
-wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"
-sleep 3s
-chmod +x tcp.sh
-yellow "下载完成,马上运行BBR加速脚本"
-bash ./tcp.sh
 }
 
 #系统网络配置优化
@@ -298,22 +298,22 @@ function start_menu(){
 
 	
     yellow " =======服务器功能====================================================== "
-    green " 21. Linux换源脚本"
-    green " 22. ipv4/6优先级调整 " 
-    green " 23. 虚拟内存SWAP一键安装 "
-    green " 24. 安装BBR加速 "
-    green " 25. 系统网络配置优化 "
-    green " 26. 宝塔中文官方一键安装 "
-	green " 27. 宝塔英文官方一键安装（无需验证） "
-	green " 28. 宝塔面板破解纯净版 "
+    green " 11. 安装BBR加速 "
+	green " 12. Linux换源脚本"
+    green " 13. ipv4/6优先级调整 " 
+    green " 14. 虚拟内存SWAP一键安装 "
+    green " 15. 系统网络配置优化 "
+    green " 16. 宝塔中文官方一键安装 "
+	green " 17. 宝塔英文官方一键安装（无需验证） "
+	green " 18. 宝塔面板破解纯净版 "
 
     yellow " =======科学上网工具===================================================== "
-    green " 41. iptables一键中转 "
-    green " 42. gost一键中转 "
-    green " 43. MTP&TLS 一键脚本 "
-    green " 44. xray一键安装8合一脚本 "
-    green " 45. v2-ui一键安装 "
-	green " 46. wulabing一键xray脚本 "
+    green " 21. iptables一键中转 "
+    green " 22. gost一键中转 "
+    green " 23. MTP&TLS 一键脚本 "
+    green " 24. xray一键安装8合一脚本 "
+    green " 25. v2-ui一键安装 "
+	green " 26. wulabing一键xray脚本 "
 	
     yellow " ======================================================================== "
     green " 0. 退出脚本"
@@ -338,35 +338,33 @@ function start_menu(){
 	;;
 	     9 )  
 	;; 
-	    10 )  
+	    11 )  Linux-NetSpeed 
 	;;
-	    21 )  cssh
+	    12 )  cssh
 	;;
-	    22 )  ipvsh
+	    13 )  ipvsh
 	;;
-	    23 )  swapsh
+	    14 )  swapsh
 	;;
-	    24 )  Linux-NetSpeed
+	    15 )  system-best
 	;;
-	    25 )  system-best
+	    16 )  btnew
 	;;
-	    26 )  btnew
+	    17 )  aaPanel
 	;;
-	    27 )  aaPanel
+	    18 )  btpj
 	;;
-	    28 )  btpj
+	    21 )  iptsh
 	;;
-	    41 )  iptsh
+	    22 )  gost
 	;;
-	    42 )  gost
+	    23 )  mtp
 	;;
-	    43 )  mtp
+	    24 )  xray
 	;;
-	    44 )  xray
+	    25 )  v2-ui
 	;;
-	    45 )  v2-ui
-	;;
-	    46 )  wulabing
+	    26 )  wulabing
 	;;
         0 )   exit 1
         ;;
