@@ -37,7 +37,7 @@ function getip(){
     echo
 }
 
-#MediaUnlock_Test 流媒体解锁测试
+#流媒体解锁测试
 function MediaUnlock_Test(){
     #安装JQ
 	if [ -e "/etc/redhat-release" ];then
@@ -56,13 +56,13 @@ function MediaUnlock_Test(){
     bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
 }
 
-#nf.sh 快速奈飞原生IP检测
-function nf2(){
+#Netflix_Test
+function Netflix_Test(){
 wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6_linux_amd64 && chmod +x nf && clear && ./nf
 }
 
-#wc 安装wget/curl
-function wget/curl(){
+#Install_wget/curl
+function Install_wget/curl(){
 	if [ -e "/etc/redhat-release" ];then
 	yum update && yum install wget curl -y;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
@@ -73,8 +73,8 @@ function wget/curl(){
 	fi
 }
 
-#jgw Oracle防火墙
-function jgw(){
+#Oracle_Firewall
+function Oracle_Firewall(){
 	if [ -e "/etc/redhat-release" ];then
 	red "CentOS系统删除多余附件"
     systemctl stop oracle-cloud-agent;
@@ -290,9 +290,9 @@ function start_menu(){
     green "  1. VPS综合性能测试脚本"
     green "  2. 获取本机IP"                      
     green "  3. 流媒体解锁测试"                          
-    green "  4. 快速奈飞原生IP检测" 
-    green "  5. 安装wget/curl"
-    green "  6. Oracle防火墙"
+    green "  4. Netflix_Test" 
+    green "  5. Install_wget/curl"
+    green "  6. Oracle_Firewall"
     
 
 	
@@ -325,11 +325,11 @@ function start_menu(){
 	;;
          3 )  MediaUnlock_Test
 	;;
-         4 )  nf2
+         4 )  Netflix_Test
 	;;
-         5 )  wget/curl
+         5 )  Install_wget/curl
 	;;
-	     6 )  jgw
+	     6 )  Oracle_Firewall
 	;;
 	     7 )  
 	;;
