@@ -142,7 +142,8 @@ bash "/root/swap.sh"
 #安装BBR加速
 function Linux-NetSpeed(){
 yellow "下载完成后,你可以输入 bash /root/tcp.sh 来手动运行或使用 ./tcp.sh 再次运行脚本"
-wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"  --limit-rate=10k
+wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"
+sleep 3s
 chmod +x tcp.sh
 yellow "下载完成,马上运行BBR加速脚本"
 bash ./tcp.sh
