@@ -291,14 +291,13 @@ function start_menu(){
     
 	
 	yellow " =======服务器检查====================================================== "
-    green "  1. Lemonbench 综合测试                     8. 奈飞原生IP检测"
-    green "  2. 三网Speedtest测速                       9. 安装wget/curl"
-    green "  3. 内存压力测试                           10. Oracle防火墙"
-    green "  4. 回程路由追踪" 
-    green "  5. Speedtest测速"
-    green "  6. 获取本机IP"
-    green "  7. 流媒体解锁测试"
-	
+    green "  1. VPS综合性能测试脚本"
+    green "  2. 获取本机IP"                      
+    green "  3. 流媒体解锁测试"                          
+    green "  4. 奈飞原生IP检测" 
+    green "  5. 安装wget/curl"
+    green "  6. Oracle防火墙"
+    
 
 	
     yellow " =======服务器功能====================================================== "
