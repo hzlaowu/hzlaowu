@@ -230,6 +230,38 @@ bash "/root/btpj.sh"
 }
 
 #科学上网工具
+#v2-ui.sh 一键安装
+function v2-ui(){
+bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
+}
+
+#xray.sh xray一键安装八合一
+function xray(){
+wget -O "/root/xray.sh" "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" --no-check-certificate -T 30 -t 5 -d
+chmod +x "/root/xray.sh"
+chmod 777 "/root/xray.sh"
+yellow "下载完成，你也可以输入 bash /root/xray.sh 来手动运行"
+bash "/root/xray.sh"
+}
+
+#wulabing.sh wulabingxray安装脚本
+function wulabing(){
+wget -O "/root/wulabing.sh" "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" --no-check-certificate -T 30 -t 5 -d
+chmod +x "/root/wulabing.sh"
+chmod 777 "/root/wulabing.sh"
+yellow "下载完成，你也可以输入 bash /root/wulabing.sh 来手动运行"
+bash "/root/wulabing.sh"
+}
+
+#MTP&TLS 一键脚本
+function mtp(){
+wget -O "/root/mtp.sh" "https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh" --no-check-certificate -T 30 -t 5 -d
+chmod +x "/root/mtp.sh"
+chmod 777 "/root/mtp.sh"
+yellow "下载完成，你也可以输入 bash /root/mtp.sh 来手动运行"
+bash "/root/mtp.sh"
+}
+
 #iptables.sh iptable中转
 function iptsh(){
 wget -O "/root/iptables.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/main/sh/iptables.sh" --no-check-certificate -T 30 -t 5 -d
@@ -248,39 +280,6 @@ yellow "下载完成，你也可以输入 bash /root/gost.sh 来手动运行"
 bash "/root/gost.sh"
 }
 
-#MTP&TLS 一键脚本
-function mtp(){
-wget -O "/root/mtp.sh" "https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/mtp.sh"
-chmod 777 "/root/mtp.sh"
-yellow "下载完成，你也可以输入 bash /root/mtp.sh 来手动运行"
-bash "/root/mtp.sh"
-}
-
-#xray.sh xray一键安装8合一
-function xray(){
-wget -O "/root/xray.sh" "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/xray.sh"
-chmod 777 "/root/xray.sh"
-yellow "下载完成，你也可以输入 bash /root/xray.sh 来手动运行"
-bash "/root/xray.sh"
-}
-
-#wulabing.sh wulabingxray安装脚本
-function wulabing(){
-wget -O "/root/wulabing.sh" "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/wulabing.sh"
-chmod 777 "/root/wulabing.sh"
-yellow "下载完成，你也可以输入 bash /root/wulabing.sh 来手动运行"
-bash "/root/wulabing.sh"
-}
-
-#v2-ui.sh 一键安装
-function v2-ui(){
-bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
-}
-
-
 #主菜单
 function start_menu(){
     clear
@@ -294,9 +293,7 @@ function start_menu(){
     green "  4. Netflix_Test" 
     green "  5. Install_wget/curl"
     green "  6. Oracle_Firewall"
-    
-
-	
+    	
     yellow " =======服务器功能====================================================== "
     green " 11. 安装BBR加速 "
 	green " 12. Linux换源脚本"
@@ -308,12 +305,12 @@ function start_menu(){
 	green " 18. 宝塔面板破解纯净版 "
 
     yellow " =======科学上网工具===================================================== "
-    green " 21. iptables一键中转 "
-    green " 22. gost一键中转 "
-    green " 23. MTP&TLS 一键脚本 "
-    green " 24. xray一键安装8合一脚本 "
-    green " 25. v2-ui一键安装 "
-	green " 26. wulabing一键xray脚本 "
+    green " 21. v2-ui一键安装 "
+    green " 22. xray一键安装八合一脚本 "
+    green " 23. wulabing一键xray脚本 "
+    green " 24. MTP&TLS 一键脚本 "
+    green " 25. iptables一键中转 "
+	green " 26. gost一键中转 "
 	
     yellow " ======================================================================== "
     green " 0. 退出脚本"
@@ -332,13 +329,7 @@ function start_menu(){
 	;;
 	     6 )  Oracle_Firewall
 	;;
-	     7 )  
-	;;
-	     8 )  
-	;;
-	     9 )  
-	;; 
-	    11 )  Linux-NetSpeed 
+        11 )  Linux-NetSpeed 
 	;;
 	    12 )  cssh
 	;;
@@ -354,17 +345,17 @@ function start_menu(){
 	;;
 	    18 )  btpj
 	;;
-	    21 )  iptsh
+	    21 )  v2-ui
 	;;
-	    22 )  gost
+	    22 )  xray
 	;;
-	    23 )  mtp
+	    23 )  wulabing
 	;;
-	    24 )  xray
+	    24 )  mtp
 	;;
-	    25 )  v2-ui
+	    25 )  iptsh
 	;;
-	    26 )  wulabing
+	    26 )  gost
 	;;
         0 )   exit 1
         ;;
