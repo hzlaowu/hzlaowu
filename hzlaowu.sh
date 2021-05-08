@@ -139,13 +139,13 @@ yellow "下载完成,你也可以输入 bash /root/swap.sh 来手动运行"
 bash "/root/swap.sh"
 }
 
-#安装BBR
-function bbr(){
-yellow "下载完成后,你可以输入 bash /root/tcpx.sh 来手动运行或使用 ./tcpx.sh 再次运行脚本"
-wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh"  --limit-rate=10k
-chmod +x tcpx.sh
+#安装BBR加速
+function Linux-NetSpeed(){
+yellow "下载完成后,你可以输入 bash /root/tcp.sh 来手动运行或使用 ./tcp.sh 再次运行脚本"
+wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"  --limit-rate=10k
+chmod +x tcp.sh
 yellow "下载完成,马上运行BBR加速脚本"
-bash ./tcpx.sh
+bash ./tcp.sh
 }
 
 #系统网络配置优化
@@ -300,7 +300,7 @@ function start_menu(){
     green " 21. Linux换源脚本"
     green " 22. ipv4/6优先级调整 " 
     green " 23. 虚拟内存SWAP一键安装 "
-    green " 24. 一键安装BBR "
+    green " 24. 安装BBR加速 "
     green " 25. 系统网络配置优化 "
     green " 26. 宝塔中文官方一键安装 "
 	green " 27. 宝塔英文官方一键安装（无需验证） "
@@ -345,7 +345,7 @@ function start_menu(){
 	;;
 	    23 )  swapsh
 	;;
-	    24 )  bbr
+	    24 )  Linux-NetSpeed
 	;;
 	    25 )  system-best
 	;;
