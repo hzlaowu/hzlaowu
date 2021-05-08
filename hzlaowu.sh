@@ -21,49 +21,22 @@ blue(){
 [[ $EUID -ne 0 ]] && echo -e && red "错误: 必须使用root用户运行此脚本！" && exit 1
 
 #服务器检查项目
-#Lemonbench 综合测试
-function Lemonbench(){
-curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s fast
+#VPS综合性能测试脚本
+function vpstest(){
+    wget -O  vpstest.sh  "https://raw.githubusercontent.com/AlexWu2022/hzlaowu/master/vpstest.sh"
+    chmod +x "vpstest.sh"
+    yellow "下载完成,之后可执行 bash ./vpstest.sh 再次运行"
+    bash vpstest.sh
+
+
 }
 
-#三网Speedtest测速
-function 3speed(){
-bash <(curl -Lso- https://git.io/superspeed)
-}
-
-#Memorytest 内存压力测试
-function memorytest(){
-yum install wget -y
-yum groupinstall "Development Tools" -y
-wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp
-blue "下载完成"
-gcc -l stdc++ memtester.cpp
-./a.out
-}
-
-#Route-trace 回城路由追踪
-function rtsh(){
-wget -O "/root/jcnf.sh" "https://raw.githubusercontent.com/Netflixxp/jcnfbesttrace/main/jcnf.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/jcnf.sh"
-chmod 777 "/root/jcnf.sh"
-yellow "下载完成,之后可执行 bash /root/jcnf.sh 再次运行"
-bash "/root/jcnf.sh"
-}
-
-#Speedtest for Linux·下载
-function speedtest-linux(){
-wget -O "/root/speedtest" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh//speedtest" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/speedtest"
-chmod 777 "/root/speedtest"
-yellow "下载完成,之后可执行 bash /root/speedtest 再次运行"
-/root/speedtest
-}
 
 #获取本机IP
 function getip(){
-echo  
-curl ip.p3terx.com
-echo
+    echo  
+    curl ip.p3terx.com
+    echo
 }
 
 #nf.sh 流媒体解锁测试
@@ -353,23 +326,23 @@ function start_menu(){
     case "$menuNumberInput" in
          1 )  Lemonbench
 	;;
-         2 )  3speed
+         2 )  getip
 	;;
-         3 )  memorytest
+         3 )  nf1
 	;;
-         4 )  rtsh
+         4 )  nf2
 	;;
-         5 )  speedtest-linux
+         5 )  wget/curl
 	;;
-	     6 )  getip
+	     6 )  jgw
 	;;
-	     7 )  nf1
+	     7 )  
 	;;
-	     8 )  nf2
+	     8 )  
 	;;
-	     9 )  wget/curl
+	     9 )  
 	;; 
-	    10 )  jgw
+	    10 )  
 	;;
 	    21 )  cssh
 	;;
