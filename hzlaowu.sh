@@ -323,7 +323,7 @@ function start_menu(){
     echo
     read -p "请输入数字:" menuNumberInput
     case "$menuNumberInput" in
-         1 )  Lemonbench
+         1 )  vpstest
 	;;
          2 )  getip
 	;;
