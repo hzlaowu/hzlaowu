@@ -27,8 +27,6 @@ function vpstest(){
     chmod +x "vpstest.sh"
     yellow "下载完成,之后可执行 bash ./vpstest.sh 再次运行"
     bash vpstest.sh
-
-
 }
 
 
