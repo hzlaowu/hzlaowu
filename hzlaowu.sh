@@ -190,13 +190,10 @@ sysctl -p
 #宝塔面板 官方版·一键安装
 function bt(){
 if cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
-    release="centos"
     yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 elif cat /etc/issue | grep -Eqi "debian"; then
-    release="debian"
     wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
 elif cat /etc/issue | grep -Eqi "ubuntu"; then
-    release="ubuntu"
     wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
 fi
 }
