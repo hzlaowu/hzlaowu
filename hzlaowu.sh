@@ -41,12 +41,12 @@ function MediaUnlock_Test(){
     if [ -e "/etc/redhat-release" ];then
 	yellow "耐心等待吧，脚本安装有点慢"
 	sleep 2s;
-	yum install wget  -y;
+	yum install wget curl -y;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "耐心等待吧，脚本安装有点慢"
 	sleep 2s;
-	apt-get install wget -y;
+	apt-get install wget curl -y;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	else 
 	echo -e "${Font_yellow}自动安装失败，请手动安装wget${Font_Suffix}";
