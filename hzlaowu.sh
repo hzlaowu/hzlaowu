@@ -211,7 +211,7 @@ function bt(){
     if [ -e "/etc/redhat-release" ];then
 	yellow "Centos安装宝塔脚本正在运行"
     yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-    elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+    elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]];then
 	yellow "Ubuntu安装宝塔脚本正在运行"
 	wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
 	#或者强制删除rm -rf /etc/iptables && reboot
