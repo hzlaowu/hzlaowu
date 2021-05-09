@@ -48,8 +48,7 @@ fi
 
 $systemPackage -y install wget curl
 
-=======
->>>>>>> d251edeb834f201b2ae317eb4fbfbe5e813cfba9
+
 # check root
 #[[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
 [[ $EUID -ne 0 ]] && echo -e && red "错误: 必须使用root用户运行此脚本！" && exit 1
