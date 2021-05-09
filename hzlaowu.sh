@@ -39,13 +39,13 @@ function getip(){
 #流媒体解锁测试
 function MediaUnlock_Test(){
     if [ -e "/etc/redhat-release" ];then
-	yellow "耐心等待吧，脚本安装有点慢"
+	yellow "新系统需要安装curl，耐心等待吧"
 	yum update -y && yum install curl -y
 	yum install epel-release
     yum install -y jq
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	yellow "耐心等待吧，脚本安装有点慢"
+	yellow "新系统需要安装curl，耐心等待吧"
 	apt-get update -y && apt-get install curl -y
 	apt install -y jq
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
