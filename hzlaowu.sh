@@ -58,8 +58,10 @@ function Netflix_Test(){
 #Install_wget/curl
 function Install_wget/curl(){
 	if [ -e "/etc/redhat-release" ];then
+	yellow "耐心等待吧，脚本安装有点慢"
 	yum update && yum install wget curl -y;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	yellow "耐心等待吧，脚本安装有点慢"
 	apt-get update && apt-get install wget curl -y;
 	else 
 	echo -e "${Font_yellow}请手动安装wget、curl${Font_Suffix}";
