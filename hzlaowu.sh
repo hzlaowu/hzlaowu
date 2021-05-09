@@ -46,7 +46,8 @@ function MediaUnlock_Test(){
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "耐心等待吧，脚本安装有点慢"
 	sleep 2s;
-	apt-get update && apt-get install curl;
+	apt-get update && apt-get install curl -y;
+	sleep 2s;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	else 
 	echo -e "${Font_yellow}自动安装失败，请手动安装wget${Font_Suffix}";
