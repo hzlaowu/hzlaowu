@@ -206,6 +206,9 @@ function bt(){
 #解除宝塔面板的强制绑定手机
 function btsj(){
     sudo sed -i "s|bind_user == 'True'|bind_user == 'XXXX'|" /www/server/panel/BTPanel/static/js/index.js;
+	red "运行完毕以后，请 清除浏览器缓存 并刷新宝塔面板！!"
+	sleep 3s
+	clear
 }
 
 
