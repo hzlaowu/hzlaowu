@@ -205,7 +205,7 @@ function bt(){
 
 #解除宝塔面板的强制绑定手机
 function btsj(){
-bash sed -i "s|bind_user == 'True'|bind_user == 'XXXX'|" /www/server/panel/BTPanel/static/js/index.js
+sed -i "s|bind_user == 'True'|bind_user == 'XXXX'|" /www/server/panel/BTPanel/static/js/index.js
 }
 
 
