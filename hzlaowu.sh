@@ -100,38 +100,38 @@ function Linux-NetSpeed(){
 
 #ChangeSource Linux换源脚本·下载
 function cssh(){
-wget -O "/root/changesource.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/changesource.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/changesource.sh"
-chmod 777 "/root/changesource.sh"
-yellow "下载完成"
-echo
-yellow "请自行输入下面命令切换对应源"
-blue  " =================================================="
-echo
-green " bash changesource.sh 切换推荐源 "
-green " bash changesource.sh cn  切换中科大源 "
-green " bash changesource.sh aliyun 切换阿里源 "
-green " bash changesource.sh 163 切换网易源 "
-green " bash changesource.sh aws 切换AWS亚马逊云源 "
-green " bash changesource.sh restore 还原默认源 "
+    wget -O "/root/changesource.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/changesource.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/changesource.sh"
+    chmod 777 "/root/changesource.sh"
+    yellow "下载完成"
+    echo
+    yellow "请自行输入下面命令切换对应源"
+    blue  " =================================================="
+    echo
+    green " bash changesource.sh 切换推荐源 "
+    green " bash changesource.sh cn  切换中科大源 "
+    green " bash changesource.sh aliyun 切换阿里源 "
+    green " bash changesource.sh 163 切换网易源 "
+    green " bash changesource.sh aws 切换AWS亚马逊云源 "
+    green " bash changesource.sh restore 还原默认源 "
 }
 
 #IPV.SH ipv4/6优先级调整
 function ipvsh(){
-wget -O "/root/ipv4.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/ipv4.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/ipv4.sh"
-chmod 777 "/root/ipv4.sh"
-yellow "下载完成,之后可执行 bash /root/ipv4.sh 再次运行"
-bash "/root/ipv4.sh"
+    wget -O "/root/ipv4.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/ipv4.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/ipv4.sh"
+    chmod 777 "/root/ipv4.sh"
+    yellow "下载完成,之后可执行 bash /root/ipv4.sh 再次运行"
+    bash "/root/ipv4.sh"
 }
 
 #SWAP一键安装/卸载脚本
 function swapsh(){
-wget -O "/root/swap.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/swap.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/swap.sh"
-chmod 777 "/root/swap.sh"
-yellow "下载完成,你也可以输入 bash /root/swap.sh 来手动运行"
-bash "/root/swap.sh"
+    wget -O "/root/swap.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/master/sh/swap.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/swap.sh"
+    chmod 777 "/root/swap.sh"
+    yellow "下载完成,你也可以输入 bash /root/swap.sh 来手动运行"
+    bash "/root/swap.sh"
 }
 
 #系统网络配置优化
@@ -156,28 +156,28 @@ function system-best(){
 	sed -i '/net.ipv4.tcp_max_orphans/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.ip_forward/d' /etc/sysctl.conf
 
-echo "net.ipv4.tcp_retries2 = 8
-net.ipv4.tcp_slow_start_after_idle = 0
-fs.file-max = 1000000
-fs.inotify.max_user_instances = 8192
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_fin_timeout = 30
-net.ipv4.tcp_tw_reuse = 1
-net.ipv4.ip_local_port_range = 1024 65000
-net.ipv4.tcp_max_syn_backlog = 16384
-net.ipv4.tcp_max_tw_buckets = 6000
-net.ipv4.route.gc_timeout = 100
-net.ipv4.tcp_syn_retries = 1
-net.ipv4.tcp_synack_retries = 1
-net.core.somaxconn = 32768
-net.core.netdev_max_backlog = 32768
-net.ipv4.tcp_timestamps = 0
-net.ipv4.tcp_max_orphans = 32768
+    echo "net.ipv4.tcp_retries2 = 8
+    net.ipv4.tcp_slow_start_after_idle = 0
+    fs.file-max = 1000000
+    fs.inotify.max_user_instances = 8192
+    net.ipv4.tcp_syncookies = 1
+    net.ipv4.tcp_fin_timeout = 30
+    net.ipv4.tcp_tw_reuse = 1
+    net.ipv4.ip_local_port_range = 1024 65000
+    net.ipv4.tcp_max_syn_backlog = 16384
+    net.ipv4.tcp_max_tw_buckets = 6000
+    net.ipv4.route.gc_timeout = 100
+    net.ipv4.tcp_syn_retries = 1
+    net.ipv4.tcp_synack_retries = 1
+    net.core.somaxconn = 32768
+    net.core.netdev_max_backlog = 32768
+    net.ipv4.tcp_timestamps = 0
+    net.ipv4.tcp_max_orphans = 32768
 # forward ipv4
 #net.ipv4.ip_forward = 1">>/etc/sysctl.conf
-sysctl -p
+    sysctl -p
 	echo "*               soft    nofile           1000000
-*               hard    nofile          1000000">/etc/security/limits.conf
+    *               hard    nofile          1000000">/etc/security/limits.conf
 	echo "ulimit -SHn 1000000">>/etc/profile
 	read -p "需要重启VPS后，才能生效系统优化配置，是否现在重启 ? [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
@@ -215,44 +215,44 @@ function btsj(){
 #科学上网工具
 #v2-ui.sh 一键安装
 function v2-ui(){
-bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
+    bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
 }
 
 #xray.sh xray一键安装八合一
 function xray(){
-wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
+    wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
 }
 
 #wulabing.sh wulabingxray安装脚本
 function wulabing(){
-wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" && chmod +x install.sh && bash install.sh
+    wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" && chmod +x install.sh && bash install.sh
 }
 
 #MTP&TLS 一键脚本
 function mtp(){
-wget -O "/root/mtp.sh" "https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/mtp.sh"
-chmod 777 "/root/mtp.sh"
-yellow "下载完成，你也可以输入 bash /root/mtp.sh 来手动运行"
-bash "/root/mtp.sh"
+    wget -O "/root/mtp.sh" "https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/mtp.sh"
+    chmod 777 "/root/mtp.sh"
+    yellow "下载完成，你也可以输入 bash /root/mtp.sh 来手动运行"
+    bash "/root/mtp.sh"
 }
 
 #iptables.sh iptable中转
 function iptsh(){
-wget -O "/root/iptables.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/main/sh/iptables.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/iptables.sh"
-chmod 777 "/root/iptables.sh"
-yellow "下载完成，你也可以输入 bash /root/iptables.sh 来手动运行"
-bash "/root/iptables.sh"
+    wget -O "/root/iptables.sh" "https://raw.githubusercontent.com/Netflixxp/jcnf-box/main/sh/iptables.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/iptables.sh"
+    chmod 777 "/root/iptables.sh"
+    yellow "下载完成，你也可以输入 bash /root/iptables.sh 来手动运行"
+    bash "/root/iptables.sh"
 }
 
 #gost.sh gost一键中转
 function gost(){
-wget -O "/root/gost" "https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/gost.sh"
-chmod 777 "/root/gost.sh"
-yellow "下载完成，你也可以输入 bash /root/gost.sh 来手动运行"
-bash "/root/gost.sh"
+    wget -O "/root/gost" "https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh" --no-check-certificate -T 30 -t 5 -d
+    chmod +x "/root/gost.sh"
+    chmod 777 "/root/gost.sh"
+    yellow "下载完成，你也可以输入 bash /root/gost.sh 来手动运行"
+    bash "/root/gost.sh"
 }
 
 #主菜单
