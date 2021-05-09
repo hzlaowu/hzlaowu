@@ -189,13 +189,18 @@ sysctl -p
 
 #宝塔面板 官方版·一键安装
 function bt(){
-if cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+    if [ -e "/etc/redhat-release" ];then
+	yellow "Centos安装宝塔脚本正在运行"
     yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-elif cat /etc/issue | grep -Eqi "debian"; then
-    wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
-elif cat /etc/issue | grep -Eqi "ubuntu"; then
-    wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
-fi
+    elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	yellow "Ubuntu安装宝塔脚本正在运行"
+	wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
+	#或者强制删除rm -rf /etc/iptables && reboot
+    else 
+	yellow "Debian安装宝塔脚本正在运行"
+	wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
+	exit;
+	fi
 }
 
 #解除宝塔面板的强制绑定手机
