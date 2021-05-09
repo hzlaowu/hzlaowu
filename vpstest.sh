@@ -59,6 +59,9 @@ vps_testrace(){
 vps_LemonBenchIntl(){
     curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s fast
 }
+vps_Cn2GIA(){
+    wget -N --no-check-certificate https://raw.githubusercontent.com/wangn9900/testvps/master/return.sh && bash return.sh
+}
 
 #Memorytest 内存压力测试
 function memorytest(){
@@ -73,7 +76,8 @@ function memorytest(){
 start_menu(){
     clear
 	green "=========================================================="
-     blue " 此脚本源于网络，只是汇聚脚本功能，仅做测试使用而已！"
+     blue " 本脚本支持：CentOS7+ / Debian9+ / Ubuntu16.04+"
+	 blue " 此脚本源于网络，只是汇聚脚本功能，仅做测试使用而已！"
 	green "=========================================================="
    yellow " 简介：VPS综合性能测试脚本 （包含性能、速度、回程路由）"
     green "=========================================================="
@@ -83,7 +87,8 @@ start_menu(){
      blue " 2. VPS 综合性能测试  （包含测速 - 英文显示）"
 	 blue " 3. VPS 回程路由      （四网测试 - 英文显示）"
 	 blue " 4. VPS 快速全方位测速（包含性能、回程、速度 - 英文显示）"
-	 blue " 5. VPS 内存压力测试"
+	 blue " 5. VPS 回程线路测试  （假CN2线路，脚本无法测试）"
+	 blue " 6. VPS 内存压力测试"
    yellow " 0. 退出脚本"
     echo
     read -p "请输入数字:" num
@@ -101,6 +106,9 @@ start_menu(){
 		vps_LemonBenchIntl
 		;;
 		5)
+		vps_Cn2GIA
+		;;
+		6)
 		memorytest
 		;;
 		0)
