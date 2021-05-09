@@ -40,14 +40,11 @@ function getip(){
 function MediaUnlock_Test(){
     if [ -e "/etc/redhat-release" ];then
 	yellow "耐心等待吧，脚本安装有点慢"
-	sleep 2s;
 	yum install curl -y;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "耐心等待吧，脚本安装有点慢"
-	sleep 2s;
 	apt-get update && apt-get install curl -y;
-	sleep 2s;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	else 
 	echo -e "${Font_yellow}自动安装失败，请手动安装wget${Font_Suffix}";
@@ -76,27 +73,27 @@ function Install_wget/curl(){
 function Oracle_Firewall(){
 	if [ -e "/etc/redhat-release" ];then
 	yellow "CentOS系统删除多余附件"
-	sleep 2s;
+	sleep 1s;
     systemctl stop oracle-cloud-agent;
     systemctl disable oracle-cloud-agent;
     systemctl stop oracle-cloud-agent-updater;
     systemctl disable oracle-cloud-agent-updater;
     yellow "停止firewall"
-	sleep 2s;
+	sleep 1s;
     systemctl stop firewalld.service;
-	sleep 2s;
+	sleep 1s;
     yellow "禁止firewall开机启动"
-	sleep 2s;
+	sleep 1s;
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
-	sleep 2s;
+	sleep 1s;
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
     sudo iptables -F;
     yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
-	sleep 2s;
+	sleep 1s;
     sudo apt-get purge netfilter-persistent;
     sudo reboot;
 	#或者强制删除rm -rf /etc/iptables && reboot
