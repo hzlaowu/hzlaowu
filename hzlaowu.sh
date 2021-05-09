@@ -39,9 +39,13 @@ function getip(){
 #流媒体解锁测试
 function MediaUnlock_Test(){
     if [ -e "/etc/redhat-release" ];then
+	yellow "耐心等待吧，脚本安装有点慢"
+	sleep 2s;
 	yum install wget  -y;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	yellow "耐心等待吧，脚本安装有点慢"
+	sleep 2s;
 	apt-get install wget -y;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	else 
@@ -58,10 +62,8 @@ function Netflix_Test(){
 #Install_wget/curl
 function Install_wget/curl(){
 	if [ -e "/etc/redhat-release" ];then
-	yellow "耐心等待吧，脚本安装有点慢"
 	yum update && yum install wget curl -y;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	yellow "耐心等待吧，脚本安装有点慢"
 	apt-get update && apt-get install wget curl -y;
 	else 
 	echo -e "${Font_yellow}请手动安装wget、curl${Font_Suffix}";
@@ -73,22 +75,27 @@ function Install_wget/curl(){
 function Oracle_Firewall(){
 	if [ -e "/etc/redhat-release" ];then
 	yellow "CentOS系统删除多余附件"
+	sleep 2s;
     systemctl stop oracle-cloud-agent;
     systemctl disable oracle-cloud-agent;
     systemctl stop oracle-cloud-agent-updater;
     systemctl disable oracle-cloud-agent-updater;
     yellow "停止firewall"
+	sleep 2s;
     systemctl stop firewalld.service;
+	sleep 2s;
     yellow "禁止firewall开机启动"
+	sleep 2s;
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
+	sleep 2s;
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
     sudo iptables -F;
     yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
-	sleep 3s;
+	sleep 2s;
     sudo apt-get purge netfilter-persistent;
     sudo reboot;
 	#或者强制删除rm -rf /etc/iptables && reboot
