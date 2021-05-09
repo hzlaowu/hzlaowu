@@ -38,7 +38,16 @@ function getip(){
 
 #流媒体解锁测试
 function MediaUnlock_Test(){
-    bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
+    if [ -e "/etc/redhat-release" ];then
+	yum install wget  -y;
+	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
+	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
+	apt-get install wget -y;
+	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
+	else 
+	echo -e "${Font_yellow}自动安装失败，请手动安装wget${Font_Suffix}";
+	exit;
+	fi
 }
 
 #Netflix_Test
