@@ -191,15 +191,12 @@ sysctl -p
 function bt(){
 if cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
-    systemPackage="yum"
     yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 elif cat /etc/issue | grep -Eqi "debian"; then
     release="debian"
-    systemPackage="apt-get"
     wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
 elif cat /etc/issue | grep -Eqi "ubuntu"; then
     release="ubuntu"
-    systemPackage="apt-get"
     wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
 fi
 }
