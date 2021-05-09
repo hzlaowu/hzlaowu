@@ -40,11 +40,12 @@ function getip(){
 function MediaUnlock_Test(){
     if [ -e "/etc/redhat-release" ];then
 	yellow "耐心等待吧，脚本安装有点慢"
-	yum install curl -y;
+	yum install epel-release;
+    yum install -y jq;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	yellow "耐心等待吧，脚本安装有点慢"
-	apt-get update && apt-get install curl -y;
+	apt install -y jq;
 	bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh");
 	else 
 	echo -e "${Font_yellow}自动安装失败，请手动安装wget${Font_Suffix}";
