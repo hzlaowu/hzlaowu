@@ -15,6 +15,37 @@ blue(){
     echo -e "\033[34m\033[01m$1\033[0m"
 }
 
+if [[ -f /etc/redhat-release ]]; then
+    release="centos"
+    systemPackage="yum"
+    systempwd="/usr/lib/systemd/system/"
+elif cat /etc/issue | grep -Eqi "debian"; then
+    release="debian"
+    systemPackage="apt-get"
+    systempwd="/lib/systemd/system/"
+elif cat /etc/issue | grep -Eqi "ubuntu"; then
+    release="ubuntu"
+    systemPackage="apt-get"
+    systempwd="/lib/systemd/system/"
+elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+    release="centos"
+    systemPackage="yum"
+    systempwd="/usr/lib/systemd/system/"
+elif cat /proc/version | grep -Eqi "debian"; then
+    release="debian"
+    systemPackage="apt-get"
+    systempwd="/lib/systemd/system/"
+elif cat /proc/version | grep -Eqi "ubuntu"; then
+    release="ubuntu"
+    systemPackage="apt-get"
+    systempwd="/lib/systemd/system/"
+elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
+    release="centos"
+    systemPackage="yum"
+    systempwd="/usr/lib/systemd/system/"
+fi
+
+$systemPackage -y install wget curl
 
 # check root
 #[[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
@@ -39,26 +70,12 @@ function getip(){
 
 #流媒体解锁测试
 function MediaUnlock_Test(){
-    #安装JQ
-	if [ -e "/etc/redhat-release" ];then
-	yum install curl -y
-	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	apt-get update && apt-get install curl
-	else 
-	echo -e "${Font_Red}请手动安装jq${Font_Suffix}";
-	exit;
-	fi
-        jq -V > /dev/null 2>&1;
-        if [ $? -ne 0 ];then
-	echo -e "${Font_Red}请手动安装jq${Font_Suffix}";
-	exit;
-        fi
     bash <(curl -sSL "https://github.com/CoiaPrant/MediaUnlock_Test/raw/main/check.sh")
 }
 
 #Netflix_Test
 function Netflix_Test(){
-wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6_linux_amd64 && chmod +x nf && clear && ./nf
+    wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.6/nf_2.6_linux_amd64 && chmod +x nf && clear && ./nf
 }
 
 #Install_wget/curl
@@ -68,7 +85,7 @@ function Install_wget/curl(){
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
 	apt-get update && apt-get install wget curl -y;
 	else 
-	echo -e "${Font_Red}请手动安装wget、curl${Font_Suffix}";
+	echo -e "${Font_yellow}请手动安装wget、curl${Font_Suffix}";
 	exit;
 	fi
 }
@@ -76,28 +93,28 @@ function Install_wget/curl(){
 #Oracle_Firewall
 function Oracle_Firewall(){
 	if [ -e "/etc/redhat-release" ];then
-	red "CentOS系统删除多余附件"
+	yellow "CentOS系统删除多余附件"
     systemctl stop oracle-cloud-agent;
     systemctl disable oracle-cloud-agent;
     systemctl stop oracle-cloud-agent-updater;
     systemctl disable oracle-cloud-agent-updater;
-    red "停止firewall"
+    yellow "停止firewall"
     systemctl stop firewalld.service;
-    red "禁止firewall开机启动"
+    yellow "禁止firewall开机启动"
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
+	yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
     sudo iptables -P OUTPUT ACCEPT;
     sudo iptables -F;
-    red "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
+    yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
 	sleep 3s;
     sudo apt-get purge netfilter-persistent;
     sudo reboot;
 	#或者强制删除rm -rf /etc/iptables && reboot
     else 
-	echo -e "${Font_Red}请手动设置防火墙${Font_Suffix}";
+	echo -e "${Font_yellow}请手动设置防火墙${Font_Suffix}";
 	exit;
 	fi
 }
@@ -105,12 +122,12 @@ function Oracle_Firewall(){
 #服务器功能调试
 #安装BBR加速
 function Linux-NetSpeed(){
-yellow "下载完成后,你可以输入 bash tcp.sh 来手动运行或使用 ./tcp.sh 再次运行BBR加速脚本"
-wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"
-sleep 2s
-chmod +x "tcp.sh"
-yellow "下载完成,马上运行BBR加速脚本"
-bash "./tcp.sh"
+    yellow "下载完成后,你可以输入 bash tcp.sh 来手动运行或使用 ./tcp.sh 再次运行BBR加速脚本"
+    wget  -N  --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh"
+    sleep 2s
+    chmod +x "tcp.sh"
+    yellow "下载完成,马上运行BBR加速脚本"
+    bash "./tcp.sh"
 }
 
 #ChangeSource Linux换源脚本·下载
@@ -120,8 +137,8 @@ chmod +x "/root/changesource.sh"
 chmod 777 "/root/changesource.sh"
 yellow "下载完成"
 echo
-green "请自行输入下面命令切换对应源"
-green " =================================================="
+yellow "请自行输入下面命令切换对应源"
+blue  " =================================================="
 echo
 green " bash changesource.sh 切换推荐源 "
 green " bash changesource.sh cn  切换中科大源 "
@@ -203,31 +220,27 @@ sysctl -p
 }
 
 #宝塔面板 官方版·一键安装
-function btnew(){
-wget -O "/root/install.sh" "http://download.bt.cn/install/install_6.0.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/install.sh"
-chmod 777 "/root/install.sh"
-blue "下载完成"
-bash "/root/install.sh"
+function bt(){
+if cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+    release="centos"
+    systemPackage="yum"
+    yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
+elif cat /etc/issue | grep -Eqi "debian"; then
+    release="debian"
+    systemPackage="apt-get"
+    wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
+elif cat /etc/issue | grep -Eqi "ubuntu"; then
+    release="ubuntu"
+    systemPackage="apt-get"
+    wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
+fi
 }
 
-#宝塔面板英文官方版·一键安装
-function aaPanel(){
-wget -O "/root/aaPanel.sh" "http://www.aapanel.com/script/install_6.0_en.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/aaPanel.sh"
-chmod 777 "/root/aaPanel.sh"
-blue "下载完成"
-bash "/root/aaPanel.sh"
+#解除宝塔面板的强制绑定手机
+function btsj(){
+bash sed -i "s|bind_user == 'True'|bind_user == 'XXXX'|" /www/server/panel/BTPanel/static/js/index.js
 }
 
-#宝塔面板破解版·一键安装
-function btpj(){
-wget -O "/root/btpj.sh" "http://download.hostcli.com/install/install_6.0.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/btpj.sh"
-chmod 777 "/root/btpj.sh"
-blue "下载完成"
-bash "/root/btpj.sh"
-}
 
 #科学上网工具
 #v2-ui.sh 一键安装
@@ -237,20 +250,12 @@ bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
 
 #xray.sh xray一键安装八合一
 function xray(){
-wget -O "/root/xray.sh" "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/xray.sh"
-chmod 777 "/root/xray.sh"
-yellow "下载完成，你也可以输入 bash /root/xray.sh 来手动运行"
-bash "/root/xray.sh"
+wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
 }
 
 #wulabing.sh wulabingxray安装脚本
 function wulabing(){
-wget -O "/root/wulabing.sh" "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" --no-check-certificate -T 30 -t 5 -d
-chmod +x "/root/wulabing.sh"
-chmod 777 "/root/wulabing.sh"
-yellow "下载完成，你也可以输入 bash /root/wulabing.sh 来手动运行"
-bash "/root/wulabing.sh"
+wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/Xray_onekey/main/install.sh" && chmod +x install.sh && bash install.sh
 }
 
 #MTP&TLS 一键脚本
@@ -283,10 +288,13 @@ bash "/root/gost.sh"
 #主菜单
 function start_menu(){
     clear
-    red   "                         hzlaowu 常用脚本包" 
-    
+    red   "                 hzlaowu 常用脚本包" 
+    blue  " ======================================================== "
+    green " 本脚本支持：CentOS7+ / Debian9+ / Ubuntu16.04+"
+	green " 此脚本源于网络，只是汇聚脚本功能，仅做测试使用而已！"
+	blue  " ======================================================== "
 	
-	yellow " =======服务器检查====================================================== "
+	blue  " =======服务器检查======================================= "
     green "  1. VPS综合性能测试脚本"
     green "  2. 获取本机IP"                      
     green "  3. 流媒体解锁测试"                          
@@ -294,17 +302,17 @@ function start_menu(){
     green "  5. Install_wget/curl"
     green "  6. Oracle_Firewall"
     	
-    yellow " =======服务器功能====================================================== "
+    blue  " =======服务器功能======================================= "
     green " 11. 安装BBR加速 "
 	green " 12. Linux换源脚本"
     green " 13. ipv4/6优先级调整 " 
     green " 14. 虚拟内存SWAP一键安装 "
     green " 15. 系统网络配置优化 "
     green " 16. 宝塔中文官方一键安装 "
-	green " 17. 宝塔英文官方一键安装（无需验证） "
-	green " 18. 宝塔面板破解纯净版 "
+	green " 17. 解除宝塔面板的强制绑定手机"
+	
 
-    yellow " =======科学上网工具===================================================== "
+    blue  " =======科学上网工具====================================== "
     green " 21. v2-ui一键安装 "
     green " 22. xray一键安装八合一脚本 "
     green " 23. wulabing一键xray脚本 "
@@ -312,8 +320,8 @@ function start_menu(){
     green " 25. iptables一键中转 "
 	green " 26. gost一键中转 "
 	
-    yellow " ======================================================================== "
-    green " 0. 退出脚本"
+    blue  " ========================================================== "
+    yellow " 0. 退出脚本"
     echo
     read -p "请输入数字:" menuNumberInput
     case "$menuNumberInput" in
@@ -339,11 +347,11 @@ function start_menu(){
 	;;
 	    15 )  system-best
 	;;
-	    16 )  btnew
+	    16 )  bt
 	;;
-	    17 )  aaPanel
+	    17 )  btsj
 	;;
-	    18 )  btpj
+	    18 )  
 	;;
 	    21 )  v2-ui
 	;;
@@ -360,7 +368,9 @@ function start_menu(){
         0 )   exit 1
         ;;
         *) red "数字输入错误，3秒后请重新输入正确的数字 !"
-		sleep 3s;clear;start_menu
+		sleep 3s
+		clear
+		start_menu
         ;;
     esac
 }
