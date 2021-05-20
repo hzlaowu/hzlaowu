@@ -123,10 +123,10 @@ function Oracle_root_passwd(){
 
 function linux5.13(){
     cd /tmp
-    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.13.0-051300rc2_5.13.0-051300rc2.202105162330_all.deb
-    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb 
-    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb
-    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb
+    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.13-rc2/amd64/linux-headers-5.13.0-051300rc2_5.13.0-051300rc2.202105162330_all.deb
+    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.13-rc2/amd64/linux-headers-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb 
+    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.13-rc2/amd64/linux-image-unsigned-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb
+    wget --no-check-certificate -c https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.13-rc2/amd64/linux-modules-5.13.0-051300rc2-generic_5.13.0-051300rc2.202105162330_amd64.deb
     sudo dpkg -i *.deb
     reboot
 }
