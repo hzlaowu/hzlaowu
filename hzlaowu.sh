@@ -106,6 +106,21 @@ function Oracle_Firewall(){
 	fi
 }
 
+#Oracle_root_passwd
+function Oracle_root_passwd(){
+    sudo lsattr /etc/passwd /etc/shadow
+    sudo chattr -i /etc/passwd /etc/shadow
+    sudo chattr -a /etc/passwd /etc/shadow
+    sudo lsattr /etc/passwd /etc/shadow
+
+    read -p "自定义ROOT密码:" passwd
+    echo root:$passwd | sudo chpasswd root
+    sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
+    sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+    sudo service sshd restart
+    sudo reboot
+}
+
 #服务器功能调试
 #安装BBR加速
 function Linux-NetSpeed(){
@@ -290,6 +305,7 @@ function start_menu(){
     green "  4. Netflix_Test" 
     green "  5. Install_wget/curl"
     green "  6. Oracle_Firewall"
+	green "  7. Oracle_root_passwd"
     	
     blue  " =======服务器功能======================================= "
     green " 11. 安装BBR加速 "
@@ -326,7 +342,9 @@ function start_menu(){
 	;;
 	     6 )  Oracle_Firewall
 	;;
-        11 )  Linux-NetSpeed 
+	     7 )  Oracle_root_passwd
+	;;
+	    11 )  Linux-NetSpeed 
 	;;
 	    12 )  cssh
 	;;
