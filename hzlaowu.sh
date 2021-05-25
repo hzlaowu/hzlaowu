@@ -89,7 +89,7 @@ function Oracle_Firewall(){
 	sleep 1s;
     systemctl disable firewalld.service;
 	elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-	yellow "关闭Oracle自带的Ubuntu镜像默认Iptable规则，并重启服务器"
+	yellow "开放Oracle所有端口"
 	sleep 1s;
 	sudo iptables -P INPUT ACCEPT;
     sudo iptables -P FORWARD ACCEPT;
