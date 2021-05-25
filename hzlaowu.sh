@@ -1,5 +1,5 @@
 #! /bin/bash
-# By hzlaowu
+# By jcnf
 
 #颜色
 red(){
