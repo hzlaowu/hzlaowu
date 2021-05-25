@@ -17,12 +17,9 @@ blue(){
 
 # check root
 #[[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
-#[[ $EUID -ne 0 ]] && echo -e && red "错误: 必须使用root用户运行此脚本！" && exit 1
+ [[ $EUID -ne 0 ]] && echo -e && red "错误: 必须使用root用户运行此脚本！" && exit 1
 
 
-#!/bin/sh
-[ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
-red "错误:如果当前用户不是root用户，请通过重新执行脚本sudo" && exit 
 
 #服务器检查项目
 #VPS综合性能测试脚本
