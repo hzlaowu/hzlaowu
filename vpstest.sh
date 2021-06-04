@@ -73,6 +73,17 @@ function memorytest(){
     ./a.out
 }
 
+#hciptest
+function hciptest(){
+    read -p "输入回程IP地址:" hcip
+ 	wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+    unzip besttrace4linux.zip
+    chmod +x besttracearm
+    ./besttracearm -q1 -g cn $hcip 
+}
+
+
+
 start_menu(){
     clear
 	green "=========================================================="
@@ -89,6 +100,7 @@ start_menu(){
 	 blue " 4. VPS 快速全方位测速（包含性能、回程、速度 - 英文显示）"
 	 blue " 5. VPS 回程线路测试  （假CN2线路，脚本无法测试）"
 	 blue " 6. VPS 内存压力测试"
+	 blue " 7. VPS 回程路由      （ipip脚本）"
    yellow " 0. 退出脚本"
     echo
     read -p "请输入数字:" num
@@ -110,6 +122,9 @@ start_menu(){
 		;;
 		6)
 		memorytest
+		;;
+		7)
+		hciptest
 		;;
 		0)
 		exit 0
