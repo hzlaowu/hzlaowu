@@ -82,7 +82,7 @@ function hciptest(){
     chmod +x besttracearm
     ./besttracearm -q1 -g cn $hcip 
 	sleep 5s
-    rm -r + *besttrace* 	
+    rm -r  *besttrace* 	
 }
 
 
