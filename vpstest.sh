@@ -81,7 +81,8 @@ function hciptest(){
 	unzip besttrace4linux.zip
     chmod +x besttracearm
     ./besttracearm -q1 -g cn $hcip 
-    rm -rv + *besttrace* 	
+	sleep 5s
+    rm -r + *besttrace* 	
 }
 
 
