@@ -75,7 +75,7 @@ function memorytest(){
 
 #hciptest
 function hciptest(){
-    read -p "输入回程IP地址:" hcip
+    read -p "输入你的回程目的IP地址:" hcip
  	wget https://cdn.ipip.net/17mon/besttrace4linux.zip
     unzip besttrace4linux.zip
     chmod +x besttracearm
